@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="3" passed="3" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2025-06-13T21:44:22 IST" name="Default suite" finished-at="2025-06-13T21:44:28 IST" duration-ms="5707">
+    <groups>
+    </groups>
+    <test started-at="2025-06-13T21:44:22 IST" name="Default test" finished-at="2025-06-13T21:44:28 IST" duration-ms="5707">
+      <class name="org.revisionJavaSelenium.ProductAnalysis">
+        <test-method is-config="true" signature="browserSetup()[pri:0, instance:org.revisionJavaSelenium.ProductAnalysis@312aa7c]" started-at="2025-06-13T21:44:18 IST" name="browserSetup" finished-at="2025-06-13T21:44:22 IST" duration-ms="3948" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- browserSetup -->
+        <test-method is-config="true" signature="urlLaunch()[pri:0, instance:org.revisionJavaSelenium.ProductAnalysis@312aa7c]" started-at="2025-06-13T21:44:22 IST" name="urlLaunch" finished-at="2025-06-13T21:44:25 IST" duration-ms="2723" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- urlLaunch -->
+        <test-method signature="productSearch()[pri:-1, instance:org.revisionJavaSelenium.ProductAnalysis@312aa7c]" started-at="2025-06-13T21:44:25 IST" name="productSearch" finished-at="2025-06-13T21:44:27 IST" duration-ms="2057" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- productSearch -->
+        <test-method signature="productAnalyze()[pri:1, instance:org.revisionJavaSelenium.ProductAnalysis@312aa7c]" started-at="2025-06-13T21:44:27 IST" name="productAnalyze" finished-at="2025-06-13T21:44:27 IST" duration-ms="600" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- productAnalyze -->
+        <test-method signature="averagePriceProduct()[pri:2, instance:org.revisionJavaSelenium.ProductAnalysis@312aa7c]" started-at="2025-06-13T21:44:27 IST" name="averagePriceProduct" finished-at="2025-06-13T21:44:28 IST" duration-ms="228" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- averagePriceProduct -->
+      </class> <!-- org.revisionJavaSelenium.ProductAnalysis -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
