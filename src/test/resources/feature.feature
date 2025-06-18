@@ -4,5 +4,5 @@ Feature: Adactin Login Functionality
     Given User is on the login page
     When User enter the username and password
     And User clicks login button
-    Then User should enter into home
+    Then User should enter into HomePage
 
