@@ -29,15 +29,15 @@
 	<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
 	<dependency>
     	<groupId>io.cucumber</groupId>
-    	<artifactId>cucumber-java</artifactId>
-    	<version>7.20.1</version>
+    	<artifactId>cucumber-junit</artifactId>
+    	<version>7.14.0</version>
 	</dependency>
 	
 	<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-testng -->
 	<dependency>
    	 	<groupId>io.cucumber</groupId>
-   		 <artifactId>cucumber-testng</artifactId>
-    	<version>7.20.1</version>
+   		 <artifactId>cucumber-java</artifactId>
+    	<version>7.14.0</version>
 	</dependency>
   
   </dependencies>
