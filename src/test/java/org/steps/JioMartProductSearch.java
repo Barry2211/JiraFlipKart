@@ -17,20 +17,20 @@ import io.cucumber.java.en.When;
 public class JioMartProductSearch extends DriverUtils{
 	public JioMartPOM jioPOM;
 	List<WebElement> productList=new ArrayList<>();
-	ProductModels product = new ProductModels("parle g", "Hearphones");
-	@Given("the user launches the Edge browser and navigates to JioMart homepage")
-	public void the_user_launches_the_edge_browser_and_navigates_to_jio_mart_homepage() {
+	@Given("the user launches the Edge browser and navigates to JioMart homepage {string}")
+	public void the_user_launches_the_edge_browser_and_navigates_to_jio_mart_homepage(String url) {
 		driverInit(MethodUtils.EDGE);
-		urlInit("https://www.jiomart.com/");
+		urlInit(url);
 		driverWait(5);
 		windowOp(MethodUtils.max);
 		jioPOM = new JioMartPOM();
 		jioPOM.getPinCode().sendKeys("600043",Keys.ENTER);
 	}
-	@When("the user enters the product brand in the search bar")
-	public void the_user_enters_the_product_brand_in_the_search_bar() {
+	@When("the user enters the product brand {string} in the search bar")
+	public void the_user_enters_the_product_brand_in_the_search_bar(String brand) {
 		jioPOM = new JioMartPOM();
-		jioPOM.getSearchBar().sendKeys(product.brand);
+		
+		jioPOM.getSearchBar().sendKeys(Keys.chord(Keys.CONTROL,"a"),brand);
 	}
 	@When("submits the search request")
 	public void submits_the_search_request() {
@@ -41,7 +41,6 @@ public class JioMartProductSearch extends DriverUtils{
 	public void the_search_results_should_contain_product_names() {
 		jioPOM = new JioMartPOM();
 		productList=jioPOM.getProductList();
-		System.out.println(productList.size());
 	}
 	@Then("the product names should include the expected model keyword")
 	public void the_product_names_should_include_the_expected_model_keyword() {
@@ -49,12 +48,12 @@ public class JioMartProductSearch extends DriverUtils{
 	    	System.out.println(prod.getText());
 	    }
 	}
-	@Then("any irrelevant product names should be reported in the console")
-	public void any_irrelevant_product_names_should_be_reported_in_the_console() {
+	@Then("any irrelevant product names should be reported in the console {string}")
+	public void any_irrelevant_product_names_should_be_reported_in_the_console(String product) {
 		 for(WebElement prod:productList) {
 		    	String text = prod.getText();
-		    	if(text.contains(product.brand)) {
-		    		System.out.println("Invalid: "+text);
+		    	if(!text.contains(product)) {
+		    		System.out.println("Irrelavent product for "+product+": "+text);
 		    	}
 		    }
 	}
