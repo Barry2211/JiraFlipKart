@@ -4,11 +4,19 @@ import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.baseclass.MethodUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -214,4 +222,32 @@ public class DriverUtils implements javaScriptCommands{
 	public static void javascript(String command){
 		((JavascriptExecutor) driver).executeScript(command);
 	}
+	
+	 public static List<ProductModels> getTestData(String filePath, String sheetName) {
+	        List<ProductModels> testData = new ArrayList<>();
+	        try (FileInputStream fis = new FileInputStream(filePath);
+	             Workbook workbook = WorkbookFactory.create(fis)) {
+
+	            Sheet sheet = workbook.getSheet(sheetName);
+	            Row headerRow = sheet.getRow(0);
+
+	            for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+	                Map<String, String> dataRow = new HashMap<>();
+	                Row row = sheet.getRow(i);
+	                for (int j = 0; j < row.getLastCellNum(); j++) {
+	                    dataRow.put(headerRow.getCell(j).getStringCellValue(),
+	                                row.getCell(j).getStringCellValue());
+	                }
+	                ProductModels data = new ProductModels(
+	                		dataRow.get(headerRow.getCell(0).getStringCellValue()), 
+	                		dataRow.get(headerRow.getCell(1).getStringCellValue())
+	                		);
+	                testData.add(data);
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        return testData;
+	    }
+
 }
