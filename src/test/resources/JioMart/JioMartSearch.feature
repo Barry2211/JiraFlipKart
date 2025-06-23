@@ -13,5 +13,5 @@ Feature: Product Search on JioMart
     
     Examples:
     |Product Brand	|	Product Name	|
-    |parle 					|	Biscut				|
+    |parle 					|	Biscuit				|
     |parle					|	Poppins				|
