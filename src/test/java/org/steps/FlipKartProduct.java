@@ -39,7 +39,7 @@ public class FlipKartProduct extends DriverUtils{
 	    flip = new FlipKartPOM();
 	    WebElement search = flip.getProdSearch();
 	    List<String> Prodlist = data.get(2);
-	    search.sendKeys(Keys.chord(Keys.CONTROL,"a"),Prodlist.get(0),Prodlist.get(1));
+	    search.sendKeys(Keys.chord(Keys.CONTROL,"a"),Prodlist.get(0),Keys.SPACE,Prodlist.get(1));
 	    search.submit();
 	}
 	
