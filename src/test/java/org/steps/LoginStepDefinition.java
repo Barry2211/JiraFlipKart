@@ -1,10 +1,15 @@
 package org.steps;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import org.baseclass.DriverUtils;
 import org.baseclass.MethodUtils;
 import org.pages.LoginPage;
 import org.testng.Assert;
 
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -15,13 +20,19 @@ public class LoginStepDefinition extends DriverUtils{
 	@Given("User is on the login page")
 	public void user_is_on_the_login_page() {
 	    driverInit(MethodUtils.EDGE);
+	    windowOp(MethodUtils.max);
 	    urlInit("https://adactinhotelapp.com/");
 	}
 	@When("User enter the username and password")
-	public void user_enter_the_username_and_password() {
+	public void user_enter_the_username_and_password(DataTable table) {
 		log=new LoginPage();
-	    log.getUserName().sendKeys("LifeHacker11");
-	    log.getPassword().sendKeys("A237F5");
+		List<Map<String, String>> dataMaps = table.asMaps();
+		Map<String, String> dataMap = dataMaps.get(0);
+		for(Entry<String,String> data: dataMap.entrySet()) {
+			log.getUserName().sendKeys(data.getKey());
+		    log.getPassword().sendKeys(data.getValue());
+		}
+	    
 	}
 	@When("User clicks login button")
 	public void user_clicks_login_button() {
