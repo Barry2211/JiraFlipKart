@@ -6,6 +6,11 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,6 +36,10 @@ import org.openqa.selenium.interactions.Actions;
 public class DriverUtils implements javaScriptCommands{
 	
 	public static WebDriver driver;
+	private static final String jdbc_url = "jdbc:oracle:thin:@localhost:1521:xe"; // Use your actual SID or service name
+    public static final String db_user = "sys";
+    public static final String db_password = "2211";
+
 	
 	public static void driverInit(MethodUtils browser) {
 		switch(browser) {
@@ -249,5 +258,30 @@ public class DriverUtils implements javaScriptCommands{
 	        }
 	        return testData;
 	    }
+	 
+	 public static List<ProductModels> getLoginCredentials() {
+	        List<ProductModels> credentialsList = new ArrayList<>();
+	        String query = "SELECT userID, username, password FROM LOGINCREDS";
+
+	        try (Connection connection = DriverManager.getConnection(jdbc_url, db_user, db_password);
+	             PreparedStatement statement = connection.prepareStatement(query);
+	             ResultSet resultSet = statement.executeQuery()) {
+
+	            while (resultSet.next()) {
+	                int userID = resultSet.getInt("userID");
+	                String username = resultSet.getString("username");
+	                String password = resultSet.getString("password");
+
+	                credentialsList.add(new ProductModels(username, password));
+	            }
+
+	        } catch (SQLException e) {
+	            System.err.println("Database connection or query failed:");
+	            e.printStackTrace();
+	        }
+
+	        return credentialsList;
+	    }
+
 
 }
