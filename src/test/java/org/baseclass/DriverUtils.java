@@ -37,8 +37,8 @@ public class DriverUtils implements javaScriptCommands{
 	
 	public static WebDriver driver;
 	private static final String jdbc_url = "jdbc:oracle:thin:@localhost:1521:xe"; // Use your actual SID or service name
-    public static final String db_user = "sys";
-    public static final String db_password = "2211";
+    public static final String db_user = "HR";
+    public static final String db_password = "abc";
 
 	
 	public static void driverInit(MethodUtils browser) {
@@ -259,20 +259,20 @@ public class DriverUtils implements javaScriptCommands{
 	        return testData;
 	    }
 	 
-	 public static List<ProductModels> getLoginCredentials() {
+	 public List<ProductModels> getLoginCredentials() {
 	        List<ProductModels> credentialsList = new ArrayList<>();
-	        String query = "SELECT userID, username, password FROM LOGINCREDS";
+	        String query = "SELECT * FROM Students";
 
 	        try (Connection connection = DriverManager.getConnection(jdbc_url, db_user, db_password);
 	             PreparedStatement statement = connection.prepareStatement(query);
 	             ResultSet resultSet = statement.executeQuery()) {
 
 	            while (resultSet.next()) {
-	                int userID = resultSet.getInt("userID");
-	                String username = resultSet.getString("username");
-	                String password = resultSet.getString("password");
+	                int id = resultSet.getInt("ID");
+	                String name = resultSet.getString("NAME");
+	                String mark = resultSet.getString("MARK");
 
-	                credentialsList.add(new ProductModels(username, password));
+	                credentialsList.add(new ProductModels(name, mark));
 	            }
 
 	        } catch (SQLException e) {

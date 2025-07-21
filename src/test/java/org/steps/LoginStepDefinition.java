@@ -31,8 +31,7 @@ public class LoginStepDefinition extends DriverUtils{
 		for(Entry<String,String> data: dataMap.entrySet()) {
 			log.getUserName().sendKeys(data.getKey());
 		    log.getPassword().sendKeys(data.getValue());
-		}
-	    
+		}   
 	}
 	@When("User clicks login button")
 	public void user_clicks_login_button() {
